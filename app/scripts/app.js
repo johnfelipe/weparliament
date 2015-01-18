@@ -63,10 +63,15 @@ var app = angular
         controller: 'PostBillCtrl',
         templateUrl: 'views/postbill.html'
       })
-      .state('bill', {
-        url: '/bill',
-        controller: 'billCtrl',
-        templateUrl: 'views/bill.html'
+      .state('Committee', {
+        url: '/committee',
+        controller: 'CommitteeCtrl',
+        templateUrl: 'views/committee.html'
+      })
+      .state('billview', {
+        url: '/billview/:billId',
+        controller: 'BillViewCtrl',
+        templateUrl: 'views/billview.html'
       })
     ;
   })
