@@ -8,6 +8,9 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
   var Bill = {
     create: function (bill) {
       return draftBills.$add(bill);
+    },
+    all: function () {
+      return approvedBills;
     }
   };
 

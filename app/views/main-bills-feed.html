@@ -1,1 +1,11 @@
 {{desc}}
+
+<ul>
+  <li ng-repeat="bill in bills">
+    <a ui-sref="billview({ billId: bill.$id})">
+    {{bill.Title + ' by ' + bill.Creator}}
+    </a>
+  </li>
+</ul>
+
+<a ui-sref="bills">all bills</a>

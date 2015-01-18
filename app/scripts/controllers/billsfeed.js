@@ -1,5 +1,6 @@
 'use strict';
 
-app.controller('BillsFeedCtrl', function ($scope) {
-  $scope.desc = 'Bills';
+app.controller('BillsFeedCtrl', function ($scope, Bill) {
+  $scope.desc = 'Bills Feed';
+  $scope.bills = Bill.all();
 });
