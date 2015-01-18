@@ -63,6 +63,11 @@ var app = angular
         controller: 'PostBillCtrl',
         templateUrl: 'views/postbill.html'
       })
+      .state('bill', {
+        url: '/bill',
+        controller: 'billCtrl',
+        templateUrl: 'views/bill.html'
+      })
     ;
   })
   .constant('FIREBASE_URL', 'https://weparliament.firebaseio.com/');
