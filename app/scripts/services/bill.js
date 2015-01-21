@@ -11,8 +11,17 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
     },
     all: function () {
       return approvedBills;
+    },
+    allDrafts: function () {
+      return draftBills;
+    },
+    pull: function (billId) {
+      /*Bill.pull({id: billId}, function () {*/
+        return draftBills.child(billId).$asObject();
+      /*});*/
     }
   };
 
+
   return Bill;
-})
+});

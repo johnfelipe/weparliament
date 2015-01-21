@@ -1,1 +1,9 @@
-{{desc}}
+<div ng-controller="CommitteeCtrl">
+  <div ng-repeat="bill in bills">
+    <a>
+
+      {{bill.Title + ' by ' + bill.Category}}
+    </a>
+    <a ng-click="pull(bill.Id) ">pull</a>
+  </div>
+</div>
