@@ -1,9 +1,44 @@
 <div ng-controller="CommitteeCtrl">
-  <div ng-repeat="bill in bills">
-    <a>
+  <div class="col-md-4">
+    <table class="table table-striped">
+      <tr>
+        <th>Title:</th>
+        <th>Description:</th>
+        <th>Pull</th>
+      </tr>
+    <tbody>
+    <tr ng-repeat="bill in bills">
+      <td>{{bill.Title}}</td>
+      <td>{{bill.Description}}</td>
+      <td>
+        <button class="btn" ng-click="pull(bill.Category)">
+          <span class="glyphicon glyphicon-inbox"></span> Pull
+        </button>
+      </td>
+    </tr>
+    </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <table>
+      <tbody>
+      <tr>
+        <td>
+          <button class="btn" ng-click="pullBack(bill.category)">
+            <span class="glyphicon glyphicon-arrow-left"></span> Pull Back
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a>{{category}}</a> Category:
+        </td>
+      </tr>
 
-      {{bill.Title + ' by ' + bill.Category}}
-    </a>
-    <a ng-click="pull(bill.Id) ">pull</a>
+      </tbody>
+
+    </table>
+
+
   </div>
 </div>
