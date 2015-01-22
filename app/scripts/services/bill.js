@@ -4,7 +4,7 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
   var ref = new Firebase(FIREBASE_URL);
   var draftBills = $firebase(ref.child('Bill-Draft')).$asArray();
   var approvedBills = $firebase(ref.child('Bill-Approved')).$asArray();
-  var categories = $firebase(ref.child('Category')).$asArray();
+  var categories = $firebase(ref.child('Category')).$asObject();
   var Bill = {
     create: function (bill) {
       return draftBills.$add(bill);
@@ -17,8 +17,8 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
     },
     pull: function (billCategory) {
       /*Bill.pull({id: billId}, function () {*/
-      var category = categories[billCategory];
-        return category;
+
+        return  $firebase(ref.child('Category').child(billCategory).child("Name")).$asObject();//categories/*.child(billCategory).$asObject()*/;
       /*});*/
     }
   };

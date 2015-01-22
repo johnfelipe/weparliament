@@ -5,12 +5,13 @@
 
 app.controller('CommitteeCtrl',function($scope,$location,Bill,Category){
   $scope.bills = Bill.allDrafts();
+  $scope.category = [];
+  $scope.pull = function(billCategory) {
+    var cat = Bill.pull(billCategory);
+    $scope.category  =cat.valueOf("name");
 
-  $scope.pull = function (bill) {
-    //var test = Ca
-    alert(bill);
+
   };
-
   /*$scope.submitBill() = function(){
     Bill.create($scope.bill).then(function (ref) {
       $location.path('/main');
