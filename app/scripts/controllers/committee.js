@@ -5,11 +5,15 @@
 
 app.controller('CommitteeCtrl',function($scope,$location,Bill,Category){
   $scope.bills = Bill.allDrafts();
-  $scope.category = [];
-  $scope.pull = function(billCategory) {
+  /*$scope.category = [];
+  $scope.bill = [];
+  $scope.title=[];
+  $scope.description=[];*/
+  $scope.pull = function(billCategory,title,desc) {
     var cat = Bill.pull(billCategory);
     $scope.category  =cat.valueOf("name");
-
+    $scope.title = title;
+    $scope.description = desc;
 
   };
   /*$scope.submitBill() = function(){

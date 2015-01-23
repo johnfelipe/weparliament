@@ -16,10 +16,10 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
       return draftBills;
     },
     pull: function (billCategory) {
-      /*Bill.pull({id: billId}, function () {*/
-
-        return  $firebase(ref.child('Category').child(billCategory).child("Name")).$asObject();//categories/*.child(billCategory).$asObject()*/;
-      /*});*/
+     return  $firebase(ref.child('Category').child(billCategory).child('Name')).$asObject();
+    },
+    comments: function (billId) {
+      return $firebase(ref.child('comments').child(billId)).$asArray();
     }
   };
 
