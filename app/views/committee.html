@@ -1,1 +1,63 @@
-{{desc}}
+<div ng-controller="CommitteeCtrl">
+  <div class="col-md-6">
+    <table class="table table-striped">
+      <tr>
+        <th>Title:</th>
+        <th>Description:</th>
+        <th>Pull</th>
+      </tr>
+    <tbody>
+    <tr ng-repeat="bill in bills">
+      <td>{{bill.Title}}</td>
+      <td>{{bill.Description}}</td>
+      <td>
+        <button class="btn" ng-click="pull(bill.Category,bill.Title,bill.Description)">
+          <span class="glyphicon glyphicon-inbox"></span> Pull
+        </button>
+      </td>
+    </tr>
+    </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <p><button class="btn" ng-click="pullBack(bill.category)">
+      <span class="glyphicon glyphicon-arrow-left"></span> Pull Back
+      </button></p>
+    </div>
+
+    <div class="row">
+      <p>Category:{{category.$value}}</p>
+    </div>
+
+    <div class="row">
+      <p>Title:{{title}}</p>
+    </div>
+
+    <div class="row">
+      <p>Description:{{description}}</p>
+    </div>
+
+    <div class="row">
+      <p>
+      Deny Reason:
+  <!-- <form  ng-submit="addDenyReason()">-->
+      <textarea
+        ng-model="commentText"
+        placeholder="Deny Reason"
+        class="form-control"></textarea>
+    <!--  <input type="submit" value="Deny Reason" class="btn btn-primary" />
+    </form>--></p>
+    </div>
+    <div class="row" >
+      <div class="pull-right">
+        <p>
+          <button class="btn" >Deny</button>
+          <button class="btn" >Approve</button>
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+</div>
