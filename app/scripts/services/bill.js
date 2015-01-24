@@ -18,13 +18,14 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
     },
     allDrafts: function () {
       return draftBills;
-    },
-    pull: function (billCategory) {
-      return  $firebase(ref.child('Category').child(billCategory).child('Name')).$asObject();
-    },
-    comments: function (billId) {
-      return $firebase(ref.child('comments').child(billId)).$asArray();
     }
+    //,
+    //pull: function (billCategory) {
+    //  return  $firebase(ref.child('Category').child(billCategory).child('Name')).$asObject();
+    //},
+    //comments: function (billId) {
+    //  return $firebase(ref.child('comments').child(billId)).$asArray();
+    //}
   };
 
   return Bill;
