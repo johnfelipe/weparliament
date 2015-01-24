@@ -11,7 +11,8 @@ app.controller('BillViewCtrl', function ($scope, $stateParams, Bill, Category) {
     console.log('supported');
   };
 
-  $scope.createVote = function () {
-    console.log('vote created');
-  };
+  $scope.supportBillCaption = function () {
+    // return Support/Cancel Support according to bill status
+    return 'Support';
+  }
 });

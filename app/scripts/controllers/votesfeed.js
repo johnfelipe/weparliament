@@ -1,5 +1,5 @@
 'use strict';
 
-app.controller('VotesFeedCtrl', function ($scope) {
-  $scope.desc = 'Votes';
+app.controller('VotesFeedCtrl', function ($scope, Vote) {
+  $scope.votes = Vote.all();
 });

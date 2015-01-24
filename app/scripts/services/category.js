@@ -13,7 +13,7 @@ app.factory('Category', function (FIREBASE_URL, $firebase) {
       return categories.$remove(category);
     },
     update: function (category){
-      categories.$save(category);
+      return categories.$save(category);
     },
     get: function (categoryId) {
       var result = $firebase(ref.child('Category').child(categoryId)).$asObject();
