@@ -18,6 +18,7 @@ app.factory('BillDraft', function (FIREBASE_URL, $firebase) {
     remove: function (bill) {
       return draftBills.$remove(bill);
     }
+
   };
 
   return BillDraft;
