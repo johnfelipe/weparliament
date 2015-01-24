@@ -1,1 +1,13 @@
-{{billId}}
+
+<div class="panel panel-default">
+  <h3><span class="label label-info">{{category.Name}}</span></h3>
+  <h2>{{bill.Title}}</h2>
+  <p>
+    {{bill.Description}}
+  </p>
+</div>
+
+  <form class="form-inline" role="form">
+    <button ng-click="support()" type="button" class="btn btn-primary">Support</button>
+    <button ng-click="createVote()" type="button" class="btn btn-danger">Create Vote</button>
+  </form>

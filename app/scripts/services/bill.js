@@ -11,6 +11,10 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
     },
     all: function () {
       return approvedBills;
+    },
+    get: function (billId) {
+      var result = $firebase(ref.child('Bill-Approved').child(billId)).$asObject();
+      return result;
     }
   };
 
