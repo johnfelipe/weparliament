@@ -11,7 +11,7 @@
       <td>{{bill.Title}}</td>
       <td>{{bill.Description}}</td>
       <td>
-        <button class="btn" ng-click="pull(bill.Category,bill)">
+        <button class="btn" ng-click="pull(bill)">
           <span class="glyphicon glyphicon-inbox"></span> Pull
         </button>
       </td>
@@ -20,7 +20,8 @@
     </tbody>
     </table>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6" ng-show="currentBill" class="ng-hide">
+    <!--<div ng-show="currentBill" class="ng-hide"></div>-->
     <div class="row">
       <p><button class="btn" ng-click="pullBack()">
       <span class="glyphicon glyphicon-arrow-left"></span> Pull Back
@@ -32,33 +33,34 @@
     </div>
 
     <div class="row">
-      <p>Title:{{title}}</p>
+      <p>Title:{{currentBill.Title}}</p>
     </div>
 
     <div class="row">
-      <p>Description:{{description}}</p>
+      <p>Description:{{currentBill.Description}}</p>
     </div>
-
+    <form name="denyForm">
     <div class="row">
+
       <p>
       Deny Reason:
   <!-- <form  ng-submit="addDenyReason()">-->
       <textarea
         ng-model="commentText"
         placeholder="Deny Reason"
-        class="form-control"></textarea>
+        class="form-control" required></textarea>
     <!--  <input type="submit" value="Deny Reason" class="btn btn-primary" />
     </form>--></p>
     </div>
     <div class="row" >
       <div class="pull-right">
         <p>
-          <button class="btn" >Deny</button>
-          <button class="btn" ng-click="submitApproveBill()">Approve</button>
+          <button class="btn"  ng-disabled="denyForm.$invalid">Deny</button>
+          <button class="btn" ng-disabled="denyForm.$valid" ng-click="submitApproveBill()">Approve</button>
         </p>
 
       </div>
     </div>
-
+    </form>
   </div>
 </div>
