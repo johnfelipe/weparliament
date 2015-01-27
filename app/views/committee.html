@@ -7,7 +7,7 @@
         <th>Pull</th>
       </tr>
     <tbody>
-    <tr ng-repeat="bill in bills|StatusFilter:'Waiting'">
+    <tr ng-repeat="bill in bills"> <!--|StatusFilter:'Waiting'-->
       <td>{{bill.Title}}</td>
       <td>{{bill.Description}}</td>
       <td>
