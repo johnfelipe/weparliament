@@ -16,7 +16,7 @@ app.factory('Category', function (FIREBASE_URL, $firebase) {
       return categories.$save(category);
     },
     get: function (categoryId) {
-      return  $firebase(ref.child('Category').child(categoryId).child("Name")).$asObject();
+      return  $firebase(ref.child('Category').child(categoryId)).$asObject();
     }
   };
 

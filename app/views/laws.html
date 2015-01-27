@@ -1,1 +1,8 @@
-{{desc}}
+<h1>All laws {{category.Name}}</h1>
+<ul>
+  <li ng-repeat="law in laws">
+    <a ui-sref="lawview({ lawId: law.$id})">
+    {{law.Title + ' by ' + law.Creator}}
+    </a>    
+  </li>
+</ul>

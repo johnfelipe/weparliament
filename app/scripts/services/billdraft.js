@@ -15,6 +15,9 @@ app.factory('BillDraft', function (FIREBASE_URL, $firebase) {
       var result = $firebase(ref.child('Bill-Draft').child(billId)).$asObject();
       return result;
     },
+	update: function (bill) {
+		return draftBills.$save(bill);
+	},
     remove: function (bill) {
       return draftBills.$remove(bill);
     }
