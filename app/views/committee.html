@@ -39,28 +39,26 @@
     <div class="row">
       <p>Description:{{currentBill.Description}}</p>
     </div>
+
     <form name="denyForm">
-    <div class="row">
-
-      <p>
-      Deny Reason:
-  <!-- <form  ng-submit="addDenyReason()">-->
-      <textarea
-        ng-model="commentText"
-        placeholder="Deny Reason"
-        class="form-control" required></textarea>
-    <!--  <input type="submit" value="Deny Reason" class="btn btn-primary" />
-    </form>--></p>
-    </div>
-    <div class="row" >
-      <div class="pull-right">
+      <div class="row">
         <p>
-          <button class="btn"  ng-disabled="denyForm.$invalid">Deny</button>
-          <button class="btn" ng-disabled="denyForm.$valid" ng-click="submitApproveBill()">Approve</button>
+        Deny Reason:
+    <!-- <form  ng-submit="addDenyReason()">-->
+        <textarea
+          ng-model="commentText"
+          placeholder="Deny Reason"
+          class="form-control" required></textarea>
         </p>
-
       </div>
-    </div>
+      <div class="row" >
+        <div class="pull-right">
+          <p>
+            <button class="btn"  ng-disabled="denyForm.$invalid">Deny</button>
+            <button class="btn" ng-disabled="denyForm.$valid" ng-click="submitApproveBill()">Approve</button>
+          </p>
+        </div>
+      </div>
     </form>
   </div>
 </div>
