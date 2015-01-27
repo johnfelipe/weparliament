@@ -49,7 +49,7 @@ var app = angular
         }
       })
       .state('laws', {
-        url:'/laws',
+        url:'/laws/:categoryId',
         controller: 'LawsCtrl',
         templateUrl: 'views/laws.html'
       })
@@ -72,6 +72,11 @@ var app = angular
         url: '/billview/:billId',
         controller: 'BillViewCtrl',
         templateUrl: 'views/billview.html'
+      })
+	  .state('lawview', {
+        url: '/lawview/:lawId',
+        controller: 'LawViewCtrl',
+        templateUrl: 'views/lawview.html'
       })
     ;
   })

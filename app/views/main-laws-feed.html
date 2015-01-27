@@ -1,8 +1,10 @@
-{{desc}}
+Laws
 
 <ul>
   <li ng-repeat="law in laws">
-    {{law.desc + ' by ' + law.creator}}
+    <a ui-sref="lawview({ lawId: law.$id})">
+    {{law.Title + ' by ' + law.Creator}}
+    </a>    
   </li>
 </ul>
 
