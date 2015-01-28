@@ -40,7 +40,13 @@
       <a href="#"><span class="glyphicon glyphicon-envelope"></span> </a>
     </li>
     <li>
-      <a href="#">Sign In</a>
+		<div ng-show="user">
+		  <p>Hello, {{ user.facebook.displayName }}</p>
+		  <button ng-click="logOut()" class="btn navbar-btn btn-default">Logout</button>
+		</div>
+		<div ng-hide="user">		  
+		  <button ng-click="logIn()" class="btn navbar-btn btn-default">Login</button>
+		</div>
     </li>
   </ul>
 </div>
