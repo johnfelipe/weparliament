@@ -1,0 +1,46 @@
+<div ng-controller="voteCtrl">
+  <div class="col-md-12">
+    <a ui-sref="voteview({ voteId: vote.$id})">
+    <div  class="well">
+      <p>
+        Owner:
+      </p>
+      <p>
+        Title:{{vote.Title}}
+      </p>
+      <p>
+        Create Date:
+      </p>
+      <p>
+        Valid Until:
+      </p>
+    </div>
+    </a>
+    <div class="row" >
+      <div class="pull-right">
+        <p>
+          <button class="btn">
+          <span class="glyphicon glyphicon-thumbs-up"></span>
+            Aye
+          </button>
+          <button class="btn" style="margin-right:14px " >
+           <span class="glyphicon glyphicon-thumbs-down"></span>
+            No
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-md-5 col-md-offset-1">
+      <div  class="well">
+        User:
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div  class="well">
+        User:
+      </div>
+    </div>
+  </div>
+</div>

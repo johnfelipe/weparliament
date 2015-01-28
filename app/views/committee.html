@@ -11,7 +11,7 @@
       <td>{{bill.Title}}</td>
       <td>{{bill.Description}}</td>
       <td>
-        <button class="btn" ng-click="pull(bill)">
+        <button class="btn" ng-click="pull(bill.$id)">
           <span class="glyphicon glyphicon-inbox"></span> Pull
         </button>
       </td>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="row">
-      <p>Category:{{category.$value}}</p>
+      <p>Category:{{category.Name}}</p>
     </div>
 
     <div class="row">

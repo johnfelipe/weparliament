@@ -68,6 +68,11 @@ var app = angular
         controller: 'CommitteeCtrl',
         templateUrl: 'views/committee.html'
       })
+      .state('voteview', {
+        url: '/voteview/:voteId',
+        controller: 'VoteViewCtrl',
+        templateUrl: 'views/voteview.html'
+      })
       .state('billview', {
         url: '/billview/:billId',
         controller: 'BillViewCtrl',
