@@ -4,10 +4,18 @@
 'use strict';
 
 app.controller('VoteViewCtrl',function($scope,$location,$stateParams,Vote){
-  console.log($stateParams.voteId)
-  var vote = Vote.get($stateParams.voteId);
-  vote.$loaded().then(function () {
-    console.log($stateParams.voteId);
-    $scope.vote = vote;
-  });
+  $scope.vote = Vote.get($stateParams.voteId);
+ console.log($scope.vote);
+  $scope.counterAye = 0;
+  $scope.counterNo = 0;
+  $scope.aye = function(userId){
+    $scope.counterAye ++;
+    console.log('user voted for the law');
+  }
+
+  $scope.no = function(userId){
+    $scope.counterNo++
+    console.log('user voted against the law');
+  }
+
 });
