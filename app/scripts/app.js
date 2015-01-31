@@ -6,9 +6,9 @@
 
 /**
  * @ngdoc overview
- * @name lawbookApp
+ * @name weparliamentApp
  * @description
- * # lawbookApp
+ * # weparliamentApp
  *
  * Main module of the application.
  */
@@ -24,6 +24,7 @@ var app = angular
     'firebase'
   ])
 .config(function ($stateProvider, $urlRouterProvider) {
+
     $urlRouterProvider.otherwise('/main');
 
     $stateProvider

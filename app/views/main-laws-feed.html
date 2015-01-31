@@ -3,8 +3,8 @@ Laws
 <ul>
   <li ng-repeat="law in laws">
     <a ui-sref="lawview({ lawId: law.$id})">
-    {{law.Title + ' by ' + law.Creator}}
-    </a>    
+    {{law.Title + ' by ' + law.OwnerName}}
+    </a>
   </li>
 </ul>
 

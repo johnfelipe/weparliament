@@ -2,20 +2,27 @@
 
 app.factory('Profile', function (FIREBASE_URL, $firebase) {
   var ref = new Firebase(FIREBASE_URL);
-  
+
   var Profile = {
-    create: function (profile) {
-      //return approvedBills.$add(bill);
-	  console.log('profile id ' + profile.uid);
-	  var p = $firebase(ref.child('Profile').child(profile.uid)).$asObject();
-		p.$loaded().then(function(){
-			if (!p.$value){
-			};
-		});
-    },   
+    create: function (user) {
+
+	    var profile = $firebase(ref.child('Profile').child(user.uid)).$asObject();
+      profile.$loaded().then(function (data) {
+        if (data.$value === null){
+          var newProfile = {
+            Facebook: user.facebook.id,
+            Name: user.facebook.displayName
+          };
+          $firebase(ref.child('Profile')).$set(user.uid, newProfile);
+        }
+        else{
+          profile.Name = user.facebook.displayName;
+          profile.$save();
+        }
+      });
+    },
     get: function (profileId) {
-      var result = $firebase(ref.child('Profile').child(profileId)).$asObject();
-      return result;
+      return $firebase(ref.child('Profile').child(profileId)).$asObject();;
     }
   };
 
