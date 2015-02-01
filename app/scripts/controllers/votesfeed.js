@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('VotesFeedCtrl', function ($scope, Vote) {
+app.controller('VotesFeedCtrl', function ($scope, Vote, Profile) {
   $scope.votes = Vote.all();
 
   $scope.votes.$watch(function (event) {

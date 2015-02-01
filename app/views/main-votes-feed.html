@@ -3,7 +3,7 @@ Votes
 <ul>
   <li ng-repeat="vote in votes">
     <a ui-sref="voteview({ voteId: vote.$id})">
-      {{vote.Bill.Title + ' by ' + vote.Bill.Creator}}
+      {{vote.Bill.Title + ' by ' + vote.Bill.OwnerName}}
     </a>
     <form class="form-group form-inline">
       <button class="btn btn-danger">No</button>
