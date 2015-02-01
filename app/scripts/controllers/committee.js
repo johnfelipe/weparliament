@@ -3,9 +3,9 @@
  */
 'use strict';
 
-app.controller('CommitteeCtrl',function($scope,$location,BillDraft,Category,Bill){
+app.controller('CommitteeCtrl',function($scope,$location,BillDraft,Category,Bill,Nav){
   $scope.bills = BillDraft.allUnHandled();
-
+  Nav.showNav = false;
   $scope.pull = function(billId) {
     $scope.currentBill = BillDraft.get(billId);
     $scope.category  = Category.get($scope.currentBill.Category);
