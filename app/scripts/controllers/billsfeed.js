@@ -1,7 +1,15 @@
 'use strict';
 
-app.controller('BillsFeedCtrl', function ($scope, Bill, Vote) {
+app.controller('BillsFeedCtrl', function ($scope, $resource, Bill, Profile, Vote) {
   $scope.bills = Bill.all();
+
+  $scope.bills.$watch(function (event) {
+    $scope.bills.forEach(function (bill) {
+      Profile.get(bill.Owner).$loaded().then(function (data) {
+        bill.OwnerName = data.Name;
+      });
+    });
+  });
 
   $scope.supportBill = function (bill) {
     console.log(bill.$id + ' is supported.');
@@ -18,5 +26,6 @@ app.controller('BillsFeedCtrl', function ($scope, Bill, Vote) {
   $scope.supportBillCaption = function (bill) {
     // return Support/Cancel Support according to bill status
     return 'Support';
-  }
+  };
+
 });

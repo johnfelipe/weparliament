@@ -1,14 +1,18 @@
 'use strict';
 
-app.controller('PostBillCtrl', function ($scope, $location, BillDraft, Category,Status) {
+app.controller('PostBillCtrl', function ($scope, $location, BillDraft, Category, Auth) {
   $scope.bill = {};
   $scope.categories = Category.all;
-  $scope.statuses = Status.all;
+  var user = Auth.$getAuth();
 
   $scope.submitBill = function () {
-    $scope.bill.status = "Waiting";
-    BillDraft.create($scope.bill).then(function (ref) {
-      $location.path('/main');
-    });
+    if (user)
+    {
+      $scope.bill.Owner = user.uid;
+      $scope.bill.HandledBy = '';
+      BillDraft.create($scope.bill).then(function (ref) {
+        $location.path('/main');
+      });
+    }
   };
 });

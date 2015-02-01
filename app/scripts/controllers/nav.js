@@ -3,11 +3,11 @@
 app.controller('NavCtrl', function ($scope, Category, Auth, Profile, Nav) {
 	$scope.categories = Category.all;
 	$scope.user = Auth.$getAuth();
-	$scope.nav = Nav;
+  $scope.nav = Nav;
 	Auth.$onAuth(function(authData) {
 	  $scope.user = Auth.$getAuth();
 	  if ($scope.user){
-		Profile.create($scope.user);
+		  Profile.create($scope.user);
 	  };
 	});
 
