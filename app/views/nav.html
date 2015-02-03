@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" ng-controller="NavCtrl" role="navigation" ng-show="nav.showNav">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
@@ -9,7 +9,7 @@
     <a class="navbar-brand" ui-sref="main">WeParliament</a>
   </div>
 
-<div ng-controller="NavCtrl" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   <ul class="nav navbar-nav navbar-left">
     <li>
       <a ng-click="postBill()" class="btn navbar-btn btn-default">Suggest a Bill</a>

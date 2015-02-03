@@ -1,8 +1,9 @@
 'use district';
 
-app.controller('NavCtrl', function ($scope, $rootScope, $state, $modal, Category, Auth, Profile) {
+app.controller('NavCtrl', function ($scope, $rootScope, $state, $modal, Category, Auth, Profile, Nav) {
 	$scope.categories = Category.all;
   $rootScope.user = $scope.user = Auth.$getAuth();
+  $scope.nav = Nav;
 
 	Auth.$onAuth(function(authData) {
     $rootScope.user = $scope.user = Auth.$getAuth();

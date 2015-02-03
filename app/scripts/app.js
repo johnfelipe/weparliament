@@ -85,6 +85,16 @@ var app = angular
         controller: 'LawViewCtrl',
         templateUrl: 'views/lawview.html'
       })
+      .state('userview',{
+        url:'/userview/:ownerId',
+        controller: 'UserViewCtrl',
+        templateUrl:'views/userview.html'
+      })
+      /*.state('userview',{
+        url:'/userview',
+        controller: 'UserViewCtrl',
+        templateUrl:'views/userview.html'
+      })*/
     ;
   })
   .constant('FIREBASE_URL', 'https://weparliament.firebaseio.com/');
