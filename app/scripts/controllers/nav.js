@@ -1,11 +1,11 @@
 'use district';
 
-app.controller('NavCtrl', function ($scope, Category, Auth, Profile) {
+app.controller('NavCtrl', function ($scope, $rootScope, $state, $modal, Category, Auth, Profile) {
 	$scope.categories = Category.all;
-	$scope.user = Auth.$getAuth();
+  $rootScope.user = $scope.user = Auth.$getAuth();
 
 	Auth.$onAuth(function(authData) {
-	  $scope.user = Auth.$getAuth();
+    $rootScope.user = $scope.user = Auth.$getAuth();
 	  if ($scope.user){
 		  Profile.create($scope.user);
 	  };
@@ -18,4 +18,27 @@ app.controller('NavCtrl', function ($scope, Category, Auth, Profile) {
 	$scope.logOut = function(){
 		Auth.$unauth();
 	};
+
+  $scope.postBill = function () {
+    if ($scope.user) {
+      $state.go('postbill');
+    }
+    else{
+      $rootScope.forceLogin('suggesting a bill');
+    }
+  };
+
+  $rootScope.forceLogin = function (action) {
+    $modal.open({
+      templateUrl: 'generalModalContent.html',
+      controller: 'GeneralModalCtrl',
+      resolve: {
+        message: function () {
+          return "You've get to log in before " + action + ".";
+        }
+      }
+    }).result.then(function () {
+        $scope.logIn();
+      });
+  };
 });

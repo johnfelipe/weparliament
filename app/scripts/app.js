@@ -21,6 +21,7 @@ var app = angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
+    'ui.bootstrap',
     'firebase'
   ])
 .config(function ($stateProvider, $urlRouterProvider) {

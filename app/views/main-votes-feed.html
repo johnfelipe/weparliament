@@ -6,8 +6,14 @@ Votes
       {{vote.Bill.Title + ' by ' + vote.Bill.OwnerName}}
     </a>
     <form class="form-group form-inline">
-      <button class="btn btn-danger">No</button>
-      <button class="btn btn-primary">Aye</button>
+      <button class="btn btn-default" ng-click="aye(vote)">
+        <span class="glyphicon glyphicon-thumbs-up"></span>
+        Aye
+      </button>
+      <button class="btn btn-default" ng-click="no(vote)">
+        <span class="glyphicon glyphicon-thumbs-down"></span>
+        No
+      </button>
     </form>
   </li>
 </ul>

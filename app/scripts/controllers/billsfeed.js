@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('BillsFeedCtrl', function ($scope, $resource, Bill, Profile, Vote) {
+app.controller('BillsFeedCtrl', function ($scope, $rootScope, $resource, Bill, Profile, Vote) {
   $scope.bills = Bill.all();
 
   $scope.bills.$watch(function (event) {
@@ -12,7 +12,12 @@ app.controller('BillsFeedCtrl', function ($scope, $resource, Bill, Profile, Vote
   });
 
   $scope.supportBill = function (bill) {
-    console.log(bill.$id + ' is supported.');
+    if ($rootScope.user){
+      console.log(bill.$id + ' is supported.');
+    }
+    else{
+      $rootScope.forceLogin('supporting a bill');
+    }
   };
 
   // temporary function
