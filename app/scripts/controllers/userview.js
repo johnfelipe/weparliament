@@ -3,7 +3,10 @@
  */
 'use strict';
 
-app.controller('UserViewCtrl', function ($scope, $location, $stateParams, Bill, Law, Auth) {
+app.controller('UserViewCtrl', function ($scope, $location, $stateParams, Bill, BillDraft,Law, Auth) {
   $scope.userLaws = Law.all();
+  $scope.userBills = Bill.all();
+  $scope.userDraftBills = BillDraft.all();
+  console.log($stateParams);
 });
 
