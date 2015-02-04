@@ -13,12 +13,26 @@ app.controller('BillsFeedCtrl', function ($scope, $rootScope, $resource, Bill, P
 
   $scope.supportBill = function (bill) {
     if ($rootScope.user){
-      console.log(bill.$id + ' is supported.');
+		if (isUserSupportBill(bill)){
+			Bill.unsupport(bill.$id, $rootScope.user.uid);
+		}	
+		else{
+			Bill.support(bill.$id, $rootScope.user.uid);
+		}      
     }
     else{
       $rootScope.forceLogin('supporting a bill');
     }
   };
+  
+  var isUserSupportBill = function(bill){
+	if ($rootScope.user){
+		return (bill.Supporters && bill.Supporters[$rootScope.user.uid]);
+	}
+	else{
+		return false;
+	}
+  }
 
   // temporary function
   $scope.createVote = function (bill) {
@@ -29,8 +43,12 @@ app.controller('BillsFeedCtrl', function ($scope, $rootScope, $resource, Bill, P
   };
 
   $scope.supportBillCaption = function (bill) {
-    // return Support/Cancel Support according to bill status
-    return 'Support';
+    if (isUserSupportBill(bill)){
+		return 'Cancel Support';
+	}	
+	else{
+		return 'Support';
+	}
   };
 
 });

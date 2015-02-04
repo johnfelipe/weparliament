@@ -4,8 +4,8 @@ Bills
   <li ng-repeat="bill in bills">
     <a ui-sref="billview({ billId: bill.$id})">
     {{bill.Title}} by {{bill.OwnerName}}
-    </a>
-    <button ng-click="supportBill(bill)" class="btn btn-default">{{supportBillCaption(bill)}}</button>
+    </a>	
+    <button ng-show="user.uid != bill.Owner" ng-click="supportBill(bill)" class="btn btn-default">{{supportBillCaption(bill)}}</button>
     <button ng-click="createVote(bill)" type="button" class="btn btn-danger">Create Vote (temp)</button>
   </li>
 </ul>
