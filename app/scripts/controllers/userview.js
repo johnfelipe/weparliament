@@ -3,10 +3,20 @@
  */
 'use strict';
 
-app.controller('UserViewCtrl', function ($scope, $location, $stateParams, Bill, BillDraft,Law, Auth) {
+app.controller('UserViewCtrl', function ($scope, $location, $rootScope, Bill, BillDraft,Law, Auth) {
   $scope.userLaws = Law.all();
   $scope.userBills = Bill.all();
   $scope.userDraftBills = BillDraft.all();
-  console.log($stateParams);
+
+  $scope.userId = $rootScope.user.uid;
+
+  $scope.isUser = function(elemant){
+        return (elemant.Owner == $scope.userId);
+  };
+
+  $scope.delete=function(userId){
+    console.log(userId);
+    alert(userId);
+  }
 });
 

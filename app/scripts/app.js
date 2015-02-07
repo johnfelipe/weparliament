@@ -86,7 +86,7 @@ var app = angular
         templateUrl: 'views/lawview.html'
       })
       .state('userview',{
-        url:'/userview/:ownerId',
+        url:'/userview',
         controller: 'UserViewCtrl',
         templateUrl:'views/userview.html'
       })
