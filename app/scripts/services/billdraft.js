@@ -23,6 +23,9 @@ app.factory('BillDraft', function (FIREBASE_URL, $firebase) {
     },
     remove: function (bill) {
       return draftBills.$remove(bill);
+    },
+    handeledByUser:function(userId){
+      return $firebase(ref.child('Bill-Draft').orderByChild('HandledBy').startAt(userId).endAt(userId)).$asArray();
     }
 
   };
