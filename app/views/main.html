@@ -10,4 +10,12 @@
    <div class="col-md-4">
      <div ui-view="votes"></div>
    </div>
+
+  <footer class="footer nav navbar-fixed-bottom">
+    <ul class="nav navbar-nav navbar-left">
+      <li>
+        <a ui-sref="committee" ng-show="profile != null && (profile.IsAdmin || profile.IsCommittee)">Committee</a>
+      </li>
+    </ul>
+  </footer>
 </div>

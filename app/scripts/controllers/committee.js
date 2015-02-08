@@ -7,14 +7,17 @@ app.controller('CommitteeCtrl',function($scope,$rootScope,BillDraft,Category,Bil
   //check if user is logged on
   if ($rootScope.user) {
     $scope.bills = BillDraft.allUnHandled();
-    console.log($rootScope.user.uid);
     Nav.showNav = false;
 
     //checking if this user has any draft bill that he started to work on
     $scope.userHandledBill = BillDraft.handeledByUser($rootScope.user.uid).$loaded().then(function (data) {
         if (data.length > 0) {
-          $scope.currentBill = data[0];
-          $scope.category = Category.get($scope.currentBill.Category);
+          var bill = data[0];
+          var currentBill = BillDraft.get(bill.$id);
+          currentBill.$loaded().then(function (data) {
+            $scope.currentBill = currentBill;
+          })
+          $scope.category = Category.get(bill.Category);
         }
       }
     );
@@ -41,7 +44,6 @@ app.controller('CommitteeCtrl',function($scope,$rootScope,BillDraft,Category,Bil
 
   //pull back a bill to the list and update that no user handle it
   $scope.pullBack = function () {
-    $scope.currentBill = BillDraft.get($scope.currentBill.$id);
     $scope.currentBill.HandledBy = '';
     BillDraft.update($scope.currentBill).then(function (success) {
         console.log(success);

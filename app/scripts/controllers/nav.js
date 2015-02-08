@@ -9,7 +9,12 @@ app.controller('NavCtrl', function ($scope, $rootScope, $state, $modal, Category
     $rootScope.user = $scope.user = Auth.$getAuth();
 	  if ($scope.user){
 		  Profile.create($scope.user);
-	  };
+      $rootScope.profile = Profile.get($scope.user.uid);
+
+	  }
+    else{
+      $rootScope.profile = null;
+    }
 	});
 
 	$scope.logIn = function(){

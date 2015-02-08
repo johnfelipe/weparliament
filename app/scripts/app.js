@@ -65,7 +65,7 @@ var app = angular
         controller: 'PostBillCtrl',
         templateUrl: 'views/postbill.html'
       })
-      .state('Committee', {
+      .state('committee', {
         url: '/committee',
         controller: 'CommitteeCtrl',
         templateUrl: 'views/committee.html'
