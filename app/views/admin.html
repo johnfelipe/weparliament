@@ -1,25 +1,47 @@
-<div ng-controller="AdminCtrl">
-  <div class="col-md-6">
-  <table>
-    <tr ng-repeat="category in categories">
-      <td>
-        <a href="#" ng-show="!isRename(category)">{{category.Name}}</a>
-        <input type="text" ng-model="category.Name" ng-show="isRename(category)"/>
-      </td>
-      <td>
-        <a ng-click="showRename(category)" ng-show="!isRename(category)" class="btn btn-sm">Rename</a>
-        <a ng-click="rename(category)" type="submit" ng-show="isRename(category)" class="btn btn-warning">Rename</a>
-        <a ng-click="showRename(category)" ng-show="isRename(category)" class="btn btn-sm">Cancel</a>
-      </td>
-      <td>
-        <a ng-click="deleteCategory(category)" class="btn btn-danger">Delete</a>
-      </td>
-    </tr>
-  </table>
+<div ng-controller="AdminCtrl" ng-show="profile != null && profile.IsAdmin">
+  <ul class="nav nav-pills nav-stacked col-md-3">
+    <li ng-class="{'active':selected == 'categories'}">
+      <a ng-click="selected = 'categories'">Categories</a>
+    </li>
+    <li ng-class="{'active':selected == 'committee'}">
+      <a ng-click="selected = 'committee'">Committee Requests</a>
+    </li>
+  </ul>
+  <div class="col-md-9" collapse="selected != 'categories'">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="category in categories">
+          <td>
+            <a href="#" ng-show="!isRename(category)">{{category.Name}}</a>
+            <input type="text" ng-model="category.Name" ng-show="isRename(category)"/>
+          </td>
+          <td>
+            <a ng-click="showRename(category)" ng-show="!isRename(category)" class="btn btn-sm">Rename</a>
+            <a ng-click="rename(category)" type="submit" ng-show="isRename(category)" class="btn btn-warning">Rename</a>
+            <a ng-click="showRename(category)" ng-show="isRename(category)" class="btn btn-sm">Cancel</a>
+          </td>
+          <td>
+            <a ng-click="deleteCategory(category)" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <form role="form" ng-submit="addCategory()">
-    <input type="text" placeholder="New Category" ng-model="newCategory.Name"/>
-    <button type="submit" class="btn btn-default">Add Category</button>
-  </form>
+    <form role="form" ng-submit="addCategory()">
+      <input type="text" placeholder="New Category" ng-model="newCategory.Name"/>
+      <button type="submit" class="btn btn-default">Add Category</button>
+    </form>
+  </div>
+  <div class="col-md-9" collapse="selected != 'committee'">
+    <p>
+      Here comes committee requests
+    </p>
   </div>
 </div>

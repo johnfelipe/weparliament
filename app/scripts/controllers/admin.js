@@ -1,10 +1,10 @@
 'use strict';
 
-app.controller('AdminCtrl', function ($scope, Category) {
+app.controller('AdminCtrl', function ($scope, $rootScope, Category) {
   var renameCategories = {};
   var renameStatus = {};
   $scope.categories = Category.all;
-  
+
   $scope.addCategory = function () {
     Category.create($scope.newCategory);
     $scope.newCategory = '';
