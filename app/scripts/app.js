@@ -80,7 +80,7 @@ var app = angular
         controller: 'BillViewCtrl',
         templateUrl: 'views/billview.html'
       })
-	  .state('lawview', {
+      .state('lawview', {
         url: '/lawview/:lawId',
         controller: 'LawViewCtrl',
         templateUrl: 'views/lawview.html'
@@ -90,11 +90,6 @@ var app = angular
         controller: 'UserViewCtrl',
         templateUrl:'views/userview.html'
       })
-      /*.state('userview',{
-        url:'/userview',
-        controller: 'UserViewCtrl',
-        templateUrl:'views/userview.html'
-      })*/
     ;
   })
   .constant('FIREBASE_URL', 'https://weparliament.firebaseio.com/');

@@ -21,11 +21,11 @@
       <div class="pull-right">
         <p>
           <button class="btn" ng-click="aye()">
-          <span class="glyphicon glyphicon-thumbs-up"></span>
+            <span class="glyphicon glyphicon-thumbs-up"></span>
             Aye
           </button>
           <button class="btn" style="margin-right:14px "  ng-click="no()">
-           <span class="glyphicon glyphicon-thumbs-down"></span>
+            <span class="glyphicon glyphicon-thumbs-down"></span>
             No
           </button>
         </p>
@@ -36,13 +36,17 @@
     <div class="col-md-5 col-md-offset-1">
       <div  class="well">
         Aye:
-        <p>User:{{counterAye}}</p>
+        <div ng-repeat="userAye in usersAye">
+          <p>User:{{userAye}}</p>
+        </div>
       </div>
     </div>
     <div class="col-md-5">
       <div  class="well">
         No:
-        <p>User:{{counterNo}}</p>
+        <div ng-repeat="userNo in usersNo">
+          <p>User:{{userNo}}</p>
+        </div>
       </div>
     </div>
   </div>
