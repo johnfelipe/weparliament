@@ -20,11 +20,11 @@
     <div class="row" >
       <div class="pull-right">
         <p>
-          <button class="btn" ng-click="aye()">
+          <button class="btn" ng-show="!isUserVotedAye" ng-click="aye()">
             <span class="glyphicon glyphicon-thumbs-up"></span>
             Aye
           </button>
-          <button class="btn" style="margin-right:14px "  ng-click="no()">
+          <button class="btn" style="margin-right:14px "  ng-show="!isUserVotedNo" ng-click="no()">
             <span class="glyphicon glyphicon-thumbs-down"></span>
             No
           </button>
@@ -36,7 +36,7 @@
     <div class="col-md-5 col-md-offset-1">
       <div  class="well">
         Aye:
-        <div ng-repeat="userAye in usersAye">
+        <div ng-repeat="userAye in usersAye|filter:isUser">
           <p>User:{{userAye}}</p>
         </div>
       </div>
@@ -44,7 +44,7 @@
     <div class="col-md-5">
       <div  class="well">
         No:
-        <div ng-repeat="userNo in usersNo">
+        <div ng-repeat="userNo in usersNo|filter:isUser">
           <p>User:{{userNo}}</p>
         </div>
       </div>

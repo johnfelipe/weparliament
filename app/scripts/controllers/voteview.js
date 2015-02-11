@@ -9,38 +9,55 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
     $scope.vote = vote;
   });
 
-  var i = 0;
-  var ayes = Vote.getAye(vote.$id);
-  ayes.$loaded().then(function(){
-   // $scope.usersAye = ayes;
-    $scope.usersAye=[];
-    angular.forEach(ayes,function(aye,key){
-      //console.log(aye + ' ' + key);
-      Profile.get(key).$loaded().then(function (data) {
-        console.log(data.Name);
-        $scope.usersAye[i] = data.Name;
-        //nameList.add(data.Name)
-        i++;
-      })
-    })
-  });
-  var nos = Vote.getNo(vote.$id);
-  nos.$loaded().then(function() {
-    // $scope.usersAye = ayes;
-    $scope.usersNo = [];
-    angular.forEach(nos, function (nos, key) {
-      //console.log(aye + ' ' + key);
-      Profile.get(key).$loaded().then(function (data) {
-        console.log(data.Name);
-        $scope.usersNo[i] = data.Name;
-        //nameList.add(data.Name)
-        i++;
-      })
-    })
-  });
-  //$scope.usersAye =
-  /*$scope.usersAye = vote.No;*/
+  new Refresh();
 
+  //refresh the users vote lists.
+  function Refresh() {
+    $scope.usersAye =[];
+    $scope.usersno=[];
+    var i = 0;
+    //update the scope for all users voted aye.
+    var ayes = Vote.getAye(vote.$id);
+    ayes.$loaded().then(function () {
+      // $scope.usersAye = ayes;
+      var listNameAye = [];
+      angular.forEach(ayes, function (aye, key) {
+        //console.log(aye + ' ' + key);
+        Profile.get(key).$loaded().then(function (data) {
+          console.log(data.Name);
+          //$scope.usersAye[i] = data.Name;
+          listNameAye[i] = data.Name;
+          //nameList.add(data.Name)
+          i++;
+        }).then(function(){
+          $scope.usersAye = listNameAye;
+        });
+
+      });
+
+    });
+
+    //update the scope for all users voted no.
+    var nos = Vote.getNo(vote.$id);
+    nos.$loaded().then(function () {
+      // $scope.usersAye = ayes;
+      //$scope.usersNo = [];
+      var listName = [];
+      angular.forEach(nos, function (no, key) {
+        console.log(no + ' ' + key);
+        Profile.get(key).$loaded().then(function (data) {
+          console.log(data.Name);
+          listName[i] = data.Name;
+          //nameList.add(data.Name)
+          i++;
+        }).then(function(){
+          $scope.usersNo = listName;
+        });
+      });
+    });
+  }
+
+  //update the list of all users voted aye.
   $scope.aye =function () {
     if ($rootScope.user) {
       if (isUserVotedNo(vote)) {
@@ -56,8 +73,10 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
     else {
       $rootScope.forceLogin('to vote ');
     }
+    new Refresh();
   };
 
+  //update the list of all users voted no.
   $scope.no =function () {
     if ($rootScope.user) {
       if (isUserVotedAye(vote)) {
@@ -73,8 +92,11 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
     else {
       $rootScope.forceLogin('supporting a bill');
     }
+    new Refresh();
   };
 
+
+  //check if user already voted yes.
   var isUserVotedAye = function(vote){
     if ($rootScope.user){
       return (vote.Aye && vote.Aye[$rootScope.user.uid]);
@@ -82,8 +104,10 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
     else{
       return false;
     }
-  }
+  };
+  $scope.isUserVotedAye = isUserVotedAye(vote);
 
+  //check if user already voted no.
   var isUserVotedNo = function(vote){
     if ($rootScope.user){
       return (vote.No && vote.No[$rootScope.user.uid]);
@@ -91,5 +115,11 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
     else{
       return false;
     }
-  }
+  };
+  $scope.isUserVotedNo = isUserVotedNo(vote);
+  $scope.isUser = function(elemant){
+    return (elemant != null);
+
+  };
+
 });
