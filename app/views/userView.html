@@ -1,0 +1,31 @@
+<div ng-controller="UserViewCtrl">
+  <div class="row">
+    <div class="col-md-4" style="margin-left:14px">
+      <button class="btn">Follower</button>
+      <button class="btn">Following</button>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="well">
+      <div class="row" ng-repeat="userLaw in userLaws|filter:isUser">
+        {{userLaw.Title}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="well">
+      <div class="row" ng-repeat="userBill in userDraftBills|filter:isUser">
+        <!--<button class="glyphicon glyphicon-remove-circle"></button> -->
+        <a ng-click="delete(userBill.$id)"><span class="glyphicon glyphicon-remove-circle"></span></a> {{userBill.Title}}  {{userBill.Description}}
+      </div>
+      <div class="row" ng-repeat="userBill in userBills|filter:isUser">
+        {{userBill.Title}}  {{userBill.Description}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="well">
+      Message:
+    </div>
+  </div>
+</div>
