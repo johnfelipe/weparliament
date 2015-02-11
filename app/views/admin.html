@@ -3,6 +3,9 @@
     <li ng-class="{'active':selected == 'categories'}">
       <a ng-click="selected = 'categories'">Categories</a>
     </li>
+    <li ng-class="{'active':selected == 'settings'}">
+      <a ng-click="selected = 'settings'">Settings</a>
+    </li>
     <li ng-class="{'active':selected == 'committee'}">
       <a ng-click="selected = 'committee'">Committee Requests</a>
     </li>
@@ -19,13 +22,13 @@
       <tbody>
         <tr ng-repeat="category in categories">
           <td>
-            <a href="#" ng-show="!isRename(category)">{{category.Name}}</a>
-            <input type="text" ng-model="category.Name" ng-show="isRename(category)"/>
+            <a href="#" ng-show="!isRenameCategory(category)">{{category.Name}}</a>
+            <input type="text" ng-model="category.Name" ng-show="isRenameCategory(category)"/>
           </td>
           <td>
-            <a ng-click="showRename(category)" ng-show="!isRename(category)" class="btn btn-sm">Rename</a>
-            <a ng-click="rename(category)" type="submit" ng-show="isRename(category)" class="btn btn-warning">Rename</a>
-            <a ng-click="showRename(category)" ng-show="isRename(category)" class="btn btn-sm">Cancel</a>
+            <a ng-click="showRenameCategory(category)" ng-show="!isRenameCategory(category)" class="btn btn-sm">Rename</a>
+            <a ng-click="renameCategory(category)" type="submit" ng-show="isRenameCategory(category)" class="btn btn-warning">Rename</a>
+            <a ng-click="showRenameCategory(category)" ng-show="isRenameCategory(category)" class="btn btn-sm">Cancel</a>
           </td>
           <td>
             <a ng-click="deleteCategory(category)" class="btn btn-danger">Delete</a>
@@ -39,6 +42,45 @@
       <button type="submit" class="btn btn-default">Add Category</button>
     </form>
   </div>
+
+  <div class="col-md-9" collapse="selected != 'settings'">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="setting in settings">
+        <td>
+          {{setting.$id}}
+        </td>
+        <td>
+          <span ng-show="!isEditSetting(setting)">{{setting.$value}}</span>
+          <input type="text" ng-model="setting.$value" ng-show="isEditSetting(setting)"/>
+        </td>
+        <td>
+          <a ng-click="showEditSetting(setting)" ng-show="!isEditSetting(setting)" class="btn btn-sm">Edit</a>
+          <a ng-click="updateSetting(setting)" type="submit" ng-show="isEditSetting(setting)" class="btn btn-warning">Update</a>
+          <a ng-click="showEditSetting(setting)" ng-show="isEditSetting(setting)" class="btn btn-sm">Cancel</a>
+        </td>
+        <td>
+          <a ng-click="deleteSetting(setting)" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <form role="form" ng-submit="addSetting()">
+      <input type="text" placeholder="Setting Key" ng-model="newSetting.Key"/>
+      <input type="text" placeholder="Setting Value" ng-model="newSetting.Value"/>
+      <button type="submit" class="btn btn-default">Add Setting</button>
+    </form>
+  </div>
+
   <div class="col-md-9" collapse="selected != 'committee'">
     <p>
       Here comes committee requests

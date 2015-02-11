@@ -6,6 +6,7 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
 
   var Bill = {
     create: function (bill) {
+      bill.CreateDate = Firebase.ServerValue.TIMESTAMP;
       return approvedBills.$add(bill);
     },
     all: function () {
@@ -21,11 +22,11 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
     remove: function (bill) {
       return approvedBills.$remove(bill);
     },
-	support: function (billId, supporterId){		
-		$firebase(ref.child('Bill-Approved').child(billId).child('Supporters')).$set(supporterId, true);		
+	support: function (billId, supporterId){
+		$firebase(ref.child('Bill-Approved').child(billId).child('Supporters')).$set(supporterId, true);
 	},
-	unsupport: function (billId, supporterId){		
-		$firebase(ref.child('Bill-Approved').child(billId).child('Supporters')).$remove(supporterId);		
+	unsupport: function (billId, supporterId){
+		$firebase(ref.child('Bill-Approved').child(billId).child('Supporters')).$remove(supporterId);
 	}
   };
 
