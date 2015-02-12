@@ -48,14 +48,14 @@
         <textarea
           ng-model="commentText"
           placeholder="Deny Reason"
-          class="form-control" required></textarea>
+          class="form-control"></textarea>
         </p>
       </div>
       <div class="row" >
         <div class="pull-right">
           <p>
-            <button class="btn"  ng-disabled="denyForm.$invalid">Deny</button>
-            <button class="btn" ng-disabled="denyForm.$valid" ng-click="submitApproveBill()">Approve</button>
+            <button class="btn"  ng-disabled="!commentText || commentText.length === 0">Deny</button>
+            <button class="btn" ng-disabled="commentText && commentText.length > 0" ng-click="submitApproveBill()">Approve</button>
           </p>
         </div>
       </div>
