@@ -9,7 +9,9 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
     $scope.vote = vote;
   });
 
-  new Refresh();
+  $scope.user = Profile.get($rootScope.user.uid);
+
+   new Refresh();
 
   //refresh the users vote lists.
   function Refresh() {
@@ -117,6 +119,8 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
     }
   };
   $scope.isUserVotedNo = isUserVotedNo(vote);
+
+  //for filter
   $scope.isUser = function(elemant){
     return (elemant != null);
 
