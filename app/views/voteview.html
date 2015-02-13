@@ -36,16 +36,16 @@
     <div class="col-md-5 col-md-offset-1">
       <div  class="well">
         Aye:
-        <div ng-repeat="userAye in usersAye|filter:isUser">
-          <p>User:{{userAye}}</p>
+        <div ng-repeat="(key,value) in usersAye" ng-init="name=getName(key)">
+          <a ui-sref="userview({ userId: key})"> {{name.Name}}</a>
         </div>
       </div>
     </div>
     <div class="col-md-5">
       <div  class="well">
         No:
-        <div ng-repeat="userNo in usersNo|filter:isUser">
-          <p>User:{{userNo}}</p>
+        <div ng-repeat="(key,value) in usersNo"  ng-init="name=getName(key)">
+          <a ui-sref="userview({ userId: key})"> {{name.Name}}</a>
         </div>
       </div>
     </div>
