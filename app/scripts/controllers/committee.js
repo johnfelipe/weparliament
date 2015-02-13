@@ -35,18 +35,18 @@ app.controller('CommitteeCtrl',function($scope,$rootScope,BillDraft,Category,Bil
 
   //pull draft bill from list and update the user that handle it.
   $scope.pull = function (billId) {
-    console.log('pull ' + billId);
-    $scope.currentBill = BillDraft.get(billId);
-    $scope.category = Category.get($scope.currentBill.Category);
-    $scope.currentBill.HandledBy = $rootScope.user.uid;
-    BillDraft.update($scope.currentBill);
+    var currentBill = BillDraft.get(billId).$loaded().then(function (data) {
+      $scope.currentBill = data;
+      $scope.category = Category.get($scope.currentBill.Category);
+      $scope.currentBill.HandledBy = $rootScope.user.uid;
+      BillDraft.update($scope.currentBill);
+    });
   };
 
   //pull back a bill to the list and update that no user handle it
   $scope.pullBack = function () {
     $scope.currentBill.HandledBy = '';
     BillDraft.update($scope.currentBill).then(function (success) {
-        console.log(success);
         clearScope();
       },
       function (error) {
@@ -57,9 +57,9 @@ app.controller('CommitteeCtrl',function($scope,$rootScope,BillDraft,Category,Bil
 
   $scope.submitApproveBill = function () {
     Bill.create($scope.currentBill).then(function (ref) {
-      $location.path('/main');
+      BillDraft.remove($scope.currentBill);
+      $scope.currentBill = null;
     });
-    BillDraft.remove(currentBill);
   };
 
   function clearScope() {
