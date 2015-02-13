@@ -7,11 +7,21 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
   var vote = Vote.get($stateParams.voteId);
   vote.$loaded().then(function(){
     $scope.vote = vote;
-    $scope.isUserVotedAye = isUserVotedAye(vote);
-    $scope.isUserVotedNo = isUserVotedNo(vote);
+    if($rootScope.user) {
+      $scope.isUserVotedAye = isUserVotedAye(vote);
+      $scope.isUserVotedNo = isUserVotedNo(vote);
+    }
+    else{
+      $scope.isUserVotedAye = true;
+      $scope.isUserVotedNo = true;
+    }
   });
 
-  $scope.user = Profile.get($rootScope.user.uid);
+  $scope.user = [];
+  if($rootScope.user){
+   $scope.user = Profile.get($rootScope.user.uid);
+  }
+
 
   //check if user already voted yes.
   var isUserVotedAye = function(vote){
