@@ -23,7 +23,14 @@ app.factory('Profile', function (FIREBASE_URL, $firebase) {
     },
     get: function (profileId) {
       return $firebase(ref.child('Profile').child(profileId)).$asObject();;
+    },
+    addFollower: function (loggedUserId,profileId){
+      $firebase(ref.child('Profile').child(profileId).child('Followers')).$set(loggedUserId, true);
+    },
+    removeFollower: function (loggedUserId,profileId){
+      $firebase(ref.child('Profile').child(profileId).child('Followers')).$remove(loggedUserId);
     }
+
   };
 
   return Profile;
