@@ -6,7 +6,6 @@ app.factory('Bill', function (FIREBASE_URL, $firebase) {
 
   var Bill = {
     create: function (bill) {
-      bill.CreateDate = Firebase.ServerValue.TIMESTAMP;
       return approvedBills.$add(bill);
     },
     all: function () {
