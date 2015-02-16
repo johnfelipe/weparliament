@@ -1,11 +1,14 @@
 <div ng-controller="UserViewCtrl">
+
   <div class="row">
     <div class="col-md-4" style="margin-left:14px">
-      <button class="btn">Follower</button>
-      <button class="btn">Following</button>
+      <button class="btn" ng-show = "myProfile" data-toggle="modal" data-target="#myModal">Follower</button>
+      <button class="btn" ng-show = "myProfile">Following</button>
+      <button class="btn" ng-click="follow()" ng-show = "!myProfile">{{buttonLabel()}}</button>
+      <button class="btn" ng-show = "!myProfile">Message</button>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4" >
     <div class="well">
       <div class="row" ng-repeat="userLaw in userLaws|filter:isUser">
         {{userLaw.Title}}
@@ -23,9 +26,29 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4" ng-show = "myProfile">
     <div class="well">
       Message:
     </div>
   </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+         <div ng-repeat="(key,value) in followers">{{key}}</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+

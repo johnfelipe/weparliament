@@ -29,6 +29,9 @@ app.factory('Profile', function (FIREBASE_URL, $firebase) {
     },
     removeFollower: function (loggedUserId,profileId){
       $firebase(ref.child('Profile').child(profileId).child('Followers')).$remove(loggedUserId);
+    },
+    getFollowers: function (profileId) {
+      return $firebase(ref.child('Profile').child(profileId).child('Followers')).$asObject();
     }
 
   };

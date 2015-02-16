@@ -8,6 +8,7 @@ app.controller('UserViewCtrl', function ($scope, $location,$stateParams, $rootSc
   $scope.userBills = Bill.all();
   $scope.userDraftBills = BillDraft.allUnHandled();
   $scope.profile = Profile.get($stateParams.userId);
+  $scope.followers = Profile.getFollowers($stateParams.userId);
   var isIAmTheUser = function() {
      if ($rootScope.user) {
        return $rootScope.user.uid === $stateParams.userId;
@@ -65,5 +66,26 @@ app.controller('UserViewCtrl', function ($scope, $location,$stateParams, $rootSc
       return 'Follow';
     }
   };
+
+  $scope.test = function(){
+    return 'test';
+  }
+
+  /*$scope.launch = fuction(which)
+  {
+    var dlg = null;
+    switch (which) {
+      case 'followers':
+        dlg = $dialogs.notify('This is followers!', 'Still eed to create the HTML');
+        break;
+      case 'following':
+        dlg = $dialogs.notify('This is following!', 'Still eed to create the HTML');
+        break;
+    };
+  };*/
+
+
+
+
 });
 
