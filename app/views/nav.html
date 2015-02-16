@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" ng-controller="NavCtrl" role="navigation" ng-show="nav.showNav">
+<nav class="navbar navbar-default" ng-controller="NavCtrl" role="navigation">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
@@ -10,7 +10,7 @@
   </div>
 
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-  <ul class="nav navbar-nav navbar-left">
+  <ul class="nav navbar-nav navbar-left" ng-show="showNav">
     <li>
       <a ng-click="postBill()" class="btn navbar-btn btn-default">Suggest a Bill</a>
     </li>
@@ -35,7 +35,7 @@
     </li>
   </ul>
 
-  <ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav navbar-right" ng-show="showNav">
     <li>
       <a href="#"><span class="glyphicon glyphicon-envelope"></span> </a>
     </li>

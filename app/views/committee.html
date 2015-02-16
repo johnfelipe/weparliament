@@ -11,7 +11,7 @@
       <td>{{bill.Title}}</td>
       <td>{{bill.Description}}</td>
       <td>
-        <button class="btn" ng-click="pull(bill.$id)">
+        <button class="btn" ng-click="pull(bill.$id)" ng-hide="currentBill">
           <span class="glyphicon glyphicon-inbox"></span> Pull
         </button>
       </td>

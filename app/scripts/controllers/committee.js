@@ -3,11 +3,11 @@
  */
 'use strict';
 
-app.controller('CommitteeCtrl',function($scope,$rootScope,BillDraft,Category,Bill,Nav) {
+app.controller('CommitteeCtrl',function($scope,$rootScope,BillDraft,Category,Bill) {
   //check if user is logged on
   if ($rootScope.user) {
     $scope.bills = BillDraft.allUnHandled();
-    Nav.showNav = false;
+    $rootScope.showNav = false;
 
     //checking if this user has any draft bill that he started to work on
     $scope.userHandledBill = BillDraft.handeledByUser($rootScope.user.uid).$loaded().then(function (data) {
