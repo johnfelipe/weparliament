@@ -34,13 +34,6 @@ app.controller('BillsFeedCtrl', function ($scope, $rootScope, $resource, Bill, P
     }
   }
 
-  // temporary function
-  $scope.createVote = function (bill) {
-    var vote = {};
-    vote.Bill = bill;
-    Vote.create(vote);
-    Bill.remove(bill);
-  };
 
   $scope.supportBillCaption = function (bill) {
     if (isUserSupportBill(bill)){
