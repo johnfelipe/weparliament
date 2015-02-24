@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4" style="margin-left:14px">
       <button class="btn" ng-show = "myProfile" data-toggle="modal" data-target="#myModal">Follower</button>
-      <button class="btn" ng-show = "myProfile">Following</button>
+      <button class="btn" ng-show = "myProfile" data-toggle="modal" data-target="#myModal2">Following</button>
       <button class="btn" ng-click="follow()" ng-show = "!myProfile">{{buttonLabel()}}</button>
       <button class="btn" ng-show = "!myProfile">Message</button>
     </div>
@@ -38,10 +38,28 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          <h4 class="modal-title" id="myModalLabel">Followers</h4>
         </div>
         <div class="modal-body">
-         <div ng-repeat="(key,value) in followers">{{key}}</div>
+         <div ng-repeat="(key,value) in followers" ng-init="name=getName(key)"><a ui-sref="userview({ userId: key})"> {{name.Name}}</a></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2 -->
+  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel2">Following</h4>
+        </div>
+        <div class="modal-body">
+          <div ng-repeat="(key,value) in following"  ng-init="name=getName(key)"><a ui-sref="userview({ userId: key})"> {{name.Name}}</a></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

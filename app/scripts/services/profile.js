@@ -22,7 +22,7 @@ app.factory('Profile', function (FIREBASE_URL, $firebase) {
       });
     },
     get: function (profileId) {
-      return $firebase(ref.child('Profile').child(profileId)).$asObject();;
+      return $firebase(ref.child('Profile').child(profileId)).$asObject();
     },
     addFollower: function (loggedUserId,profileId){
       $firebase(ref.child('Profile').child(profileId).child('Followers')).$set(loggedUserId, true);
@@ -30,11 +30,22 @@ app.factory('Profile', function (FIREBASE_URL, $firebase) {
     removeFollower: function (loggedUserId,profileId){
       $firebase(ref.child('Profile').child(profileId).child('Followers')).$remove(loggedUserId);
     },
-    getFollowers: function (profileId) {
+    getFollowing: function (profileId) {
       return $firebase(ref.child('Profile').child(profileId).child('Followers')).$asObject();
+    },
+    addFollowing: function (loggedUserId,profileId){
+      $firebase(ref.child('Profile').child(loggedUserId).child('Following')).$set(profileId, true);
+    },
+    removeFollowing: function (loggedUserId,profileId){
+      $firebase(ref.child('Profile').child(loggedUserId).child('Following')).$remove(profileId);
+    },
+    getFollowers: function (loggedUserId) {
+          var t =  $firebase(ref.child('Profile').child(loggedUserId).child('Following')).$asObject();
+      console.log(t);
+      return t;
     }
 
   };
 
   return Profile;
-})
+});

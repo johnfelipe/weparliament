@@ -8,7 +8,15 @@ app.controller('UserViewCtrl', function ($scope, $location,$stateParams, $rootSc
   $scope.userBills = Bill.all();
   $scope.userDraftBills = BillDraft.allUnHandled();
   $scope.profile = Profile.get($stateParams.userId);
-  $scope.followers = Profile.getFollowers($stateParams.userId);
+
+  //get all users i follow
+  $scope.following = Profile.getFollowing($stateParams.userId);
+  //get all users follow me
+  $scope.followers = Profile.getFollowers($stateParams.userId);/*.$loaded().then(function(){
+    console.log($scope.followers);
+  });*/
+  console.log($scope.followers);
+
   var isIAmTheUser = function() {
      if ($rootScope.user) {
        return $rootScope.user.uid === $stateParams.userId;
@@ -17,6 +25,7 @@ app.controller('UserViewCtrl', function ($scope, $location,$stateParams, $rootSc
        return false;
      }
    };
+
 
   var isFollowedByMe = function() {
     if($scope.profile.Followers && $scope.profile.Followers [$scope.userId]){
@@ -51,9 +60,11 @@ app.controller('UserViewCtrl', function ($scope, $location,$stateParams, $rootSc
     var isFollow = isFollowedByMe();
       if(!isFollow) {
         Profile.addFollower($scope.userId, $stateParams.userId);
+        Profile.addFollowing($scope.userId, $stateParams.userId);
       }
       else{
         Profile.removeFollower($scope.userId, $stateParams.userId);
+        Profile.removeFollowing($scope.userId, $stateParams.userId);
       }
     $scope.profile = Profile.get($stateParams.userId);
   };
@@ -70,6 +81,10 @@ app.controller('UserViewCtrl', function ($scope, $location,$stateParams, $rootSc
   $scope.test = function(){
     return 'test';
   }
+
+  $scope.getName = function(key){
+    return  Profile.get(key);
+  };
 
   /*$scope.launch = fuction(which)
   {
