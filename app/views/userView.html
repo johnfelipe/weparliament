@@ -41,7 +41,9 @@
           <h4 class="modal-title" id="myModalLabel">Followers</h4>
         </div>
         <div class="modal-body">
-         <div ng-repeat="(key,value) in followers" ng-init="name=getName(key)"><a ui-sref="userview({ userId: key})"> {{name.Name}}</a></div>
+         <div ng-repeat="(key,value) in followers" ng-init="name=getName(key)">
+           <img class="pic" src="https://graph.facebook.com/{{name.Facebook}}/picture">
+           <a ui-sref="userview({ userId: key})"> {{name.Name}}</a></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -59,7 +61,9 @@
           <h4 class="modal-title" id="myModalLabel2">Following</h4>
         </div>
         <div class="modal-body">
-          <div ng-repeat="(key,value) in following"  ng-init="name=getName(key)"><a ui-sref="userview({ userId: key})"> {{name.Name}}</a></div>
+          <div ng-repeat="(key,value) in following"  ng-init="name=getName(key)">
+            <img class="pic" src="https://graph.facebook.com/{{name.Facebook}}/picture">
+            <a ui-sref="userview({ userId: key})"> {{name.Name}}</a></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

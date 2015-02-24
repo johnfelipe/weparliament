@@ -9,6 +9,7 @@ app.controller('NavCtrl', function ($scope, $rootScope, $state, $modal, Category
 	  if ($scope.user){
 		  Profile.create($scope.user);
       $rootScope.profile = Profile.get($scope.user.uid);
+      //console.log($rootScope.profile.Facebook );
 
 	  }
     else{
