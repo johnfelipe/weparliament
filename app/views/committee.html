@@ -54,7 +54,7 @@
       <div class="row" >
         <div class="pull-right">
           <p>
-            <button class="btn"  ng-disabled="!commentText || commentText.length === 0">Deny</button>
+            <button class="btn"  ng-disabled="!commentText || commentText.length === 0" ng-click="submitDenyBill(commentText)">Deny</button>
             <button class="btn" ng-disabled="commentText && commentText.length > 0" ng-click="submitApproveBill()">Approve</button>
           </p>
         </div>

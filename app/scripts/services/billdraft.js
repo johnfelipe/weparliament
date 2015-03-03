@@ -17,6 +17,9 @@ app.factory('BillDraft', function (FIREBASE_URL, $firebase) {
     update: function (bill) {
       return $firebase(ref.child('Bill-Draft').child(bill.$id)).$set("HandledBy", bill.HandledBy);
     },
+    UpdateDeny: function (bill) {
+      return $firebase(ref.child('Bill-Draft').child(bill.$id)).$set("DenyReason", bill.DenyReason);
+    },
     remove: function (bill) {
       return $firebase(ref.child('Bill-Draft')).$remove(bill.$id);
     },

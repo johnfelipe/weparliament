@@ -12,7 +12,22 @@ app.controller('CommitteeCtrl',function($scope,$rootScope,BillDraft,Category,Bil
     //checking if this user has any draft bill that he started to work on
     $scope.userHandledBill = BillDraft.handeledByUser($rootScope.user.uid).$loaded().then(function (data) {
         if (data.length > 0) {
-          var bill = data[0];
+          //console.log(data.count());
+          var bill;
+          for(var i = 0 ; i<data.length;i++)
+          {
+            if(!data[i].hasOwnProperty('DenyReason') ){
+              bill = data[i];
+              break;
+            }
+          }
+         /* data.foreach(function(singleData){
+            if(singleData.DenyReason == null){
+              bill = singleData;
+            }
+
+          })*/
+          //var bill = data[0];
           var currentBill = BillDraft.get(bill.$id);
           currentBill.$loaded().then(function (data) {
             $scope.currentBill = currentBill;
@@ -60,6 +75,16 @@ app.controller('CommitteeCtrl',function($scope,$rootScope,BillDraft,Category,Bil
       BillDraft.remove($scope.currentBill);
       $scope.currentBill = null;
     });
+  };
+
+  $scope.submitDenyBill = function (commentText) {
+    $scope.currentBill.DenyReason = commentText;
+    console.log($scope.currentBill);
+    BillDraft.UpdateDeny($scope.currentBill);
+    $scope.currentBill = null;
+      /*BillDraft.remove($scope.currentBill);
+      $scope.currentBill = null;
+    });*/
   };
 
   function clearScope() {
