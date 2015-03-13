@@ -2,11 +2,11 @@
 
 app.factory('Profile', function (FIREBASE_URL, $firebase) {
   var ref = new Firebase(FIREBASE_URL);
-
+  // var date = ref.child('updated_at').set(Firebase.ServerValue.TIMESTAMP);
   var Profile = {
     create: function (user) {
 
-	    var profile = $firebase(ref.child('Profile').child(user.uid)).$asObject();
+      var profile = $firebase(ref.child('Profile').child(user.uid)).$asObject();
       profile.$loaded().then(function (data) {
         if (data.$value === null){
           var newProfile = {
@@ -40,9 +40,19 @@ app.factory('Profile', function (FIREBASE_URL, $firebase) {
       $firebase(ref.child('Profile').child(loggedUserId).child('Following')).$remove(profileId);
     },
     getFollowers: function (loggedUserId) {
-          var t =  $firebase(ref.child('Profile').child(loggedUserId).child('Following')).$asObject();
+      var t =  $firebase(ref.child('Profile').child(loggedUserId).child('Following')).$asObject();
       console.log(t);
       return t;
+    },
+    commitMessage: function(text,profileId,loggedUserId){
+      $firebase(ref.child('Profile').child(profileId).child('Message')).$push({
+        User:loggedUserId,
+        ArriveAt:Firebase.ServerValue.TIMESTAMP,
+        Message:text
+      });
+    },
+    getMessages: function(profileId){
+      return $firebase(ref.child('Profile').child(profileId).child('Message').orderByChild('ArriveAt')).$asArray();
     }
 
   };
