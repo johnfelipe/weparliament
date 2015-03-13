@@ -19,7 +19,7 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
 
   $scope.user = [];
   if($rootScope.user){
-   $scope.user = Profile.get($rootScope.user.uid);
+    $scope.user = Profile.get($rootScope.user.uid);
   }
 
 
@@ -64,7 +64,7 @@ app.controller('VoteViewCtrl',function($scope,$location, $rootScope, $stateParam
     $scope.usersNo = nis;
   });
 
-   $scope.getName = function(key){
+  $scope.getName = function(key){
     return  Profile.get(key);
   };
 

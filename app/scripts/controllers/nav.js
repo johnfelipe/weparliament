@@ -1,29 +1,32 @@
 'use district';
 
 app.controller('NavCtrl', function ($scope, $rootScope, $state, $modal, Category, Auth, Profile) {
-	$scope.categories = Category.all;
+  $scope.categories = Category.all;
   $rootScope.user = $scope.user = Auth.$getAuth();
 
-	Auth.$onAuth(function(authData) {
+  Auth.$onAuth(function(authData) {
     $rootScope.user = $scope.user = Auth.$getAuth();
-	  if ($scope.user){
-		  Profile.create($scope.user);
+    if ($scope.user){
+      Profile.create($scope.user);
       $rootScope.profile = Profile.get($scope.user.uid);
       //console.log($rootScope.profile.Facebook );
 
-	  }
+    }
     else{
       $rootScope.profile = null;
     }
-	});
+  });
+  $scope.image = function()
+  {
+    return 'https://graph.facebook.com/' + $rootScope.profile.Facebook + '/picture';
+  };
+  $scope.logIn = function(){
+    Auth.$authWithOAuthPopup('facebook');
+  };
 
-	$scope.logIn = function(){
-		Auth.$authWithOAuthPopup('facebook');
-	};
-
-	$scope.logOut = function(){
-		Auth.$unauth();
-	};
+  $scope.logOut = function(){
+    Auth.$unauth();
+  };
 
   $scope.postBill = function () {
     if ($scope.user) {
