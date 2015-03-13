@@ -3,69 +3,64 @@
  */
 'use strict';
 
-app.controller('UserViewCtrl', function ($scope, $location,$stateParams, $rootScope, Bill, BillDraft,Law, Profile) {
+app.controller('UserViewCtrl', function ($scope, $location,$stateParams, $rootScope,$anchorScroll, Bill, BillDraft,Law, Profile) {
   $scope.userLaws = Law.all();
   $scope.userBills = Bill.all();
   $scope.userDraftBills = BillDraft.allUnHandled();
   $scope.profile = Profile.get($stateParams.userId);
+  $scope.messageBoard = Profile.getMessages($rootScope.user.uid);
 
   //get all users i follow
   $scope.following = Profile.getFollowing($stateParams.userId);
   //get all users follow me
-  $scope.followers = Profile.getFollowers($stateParams.userId);/*.$loaded().then(function(){
-    console.log($scope.followers);
-  });*/
-  console.log($scope.followers);
+  $scope.followers = Profile.getFollowers($stateParams.userId);
 
   var isIAmTheUser = function() {
-     if ($rootScope.user) {
-       return $rootScope.user.uid === $stateParams.userId;
-     }
-     else {
-       return false;
-     }
-   };
-
-
-  var isFollowedByMe = function() {
-    if($scope.profile.Followers && $scope.profile.Followers [$scope.userId]){
-      return true;
+    if ($rootScope.user) {
+      return $rootScope.user.uid === $stateParams.userId;
     }
-    else{
+    else {
       return false;
     }
+  };
+
+  var isFollowedByMe = function() {
+    return ($scope.profile.Followers && $scope.profile.Followers [$scope.userId]);/*{
+     return true;
+     }
+     else{
+     return false;
+     }*/
   };
 
   $scope.IsFollowedbyMe = isFollowedByMe();
   $scope.myProfile = isIAmTheUser();
   $scope.userId = $rootScope.user.uid;
 
-
   $scope.isUser = function(element){
     if(isIAmTheUser()){
-        return (element.Owner == $scope.userId);
+      return (element.Owner == $scope.userId);
     }
     else{
       return false;
     }
-
   };
 
-  $scope.delete=function(userId){
-    console.log(userId);
-    alert(userId);
-  }
+  /*$scope.delete=function(userId){
+   console.log(userId);
+   alert(userId);
+   };*/
 
   $scope.follow = function(){
     var isFollow = isFollowedByMe();
-      if(!isFollow) {
-        Profile.addFollower($scope.userId, $stateParams.userId);
-        Profile.addFollowing($scope.userId, $stateParams.userId);
-      }
-      else{
-        Profile.removeFollower($scope.userId, $stateParams.userId);
-        Profile.removeFollowing($scope.userId, $stateParams.userId);
-      }
+    if(!isFollow) {
+      Profile.addFollower($scope.userId, $stateParams.userId);
+      Profile.addFollowing($scope.userId, $stateParams.userId);
+    }
+    else{
+      Profile.removeFollower($scope.userId, $stateParams.userId);
+      Profile.removeFollowing($scope.userId, $stateParams.userId);
+    }
     $scope.profile = Profile.get($stateParams.userId);
   };
 
@@ -78,29 +73,38 @@ app.controller('UserViewCtrl', function ($scope, $location,$stateParams, $rootSc
     }
   };
 
-  $scope.test = function(){
-    return 'test';
-  }
-
   $scope.getName = function(key){
     return  Profile.get(key);
   };
 
-  /*$scope.launch = fuction(which)
-  {
-    var dlg = null;
-    switch (which) {
-      case 'followers':
-        dlg = $dialogs.notify('This is followers!', 'Still eed to create the HTML');
-        break;
-      case 'following':
-        dlg = $dialogs.notify('This is following!', 'Still eed to create the HTML');
-        break;
+  $scope.writeMessage = function(){
+
+  };
+
+  $scope.submitMessage = function(messageArea){
+    Profile.commitMessage(messageArea,$stateParams.userId,$scope.userId);
+  };
+
+  $scope.gotoBottom = function() {
+    $anchorScroll();
+  };
+
+  $scope.formattedMessage = function(msg){
+    var time = new Date(msg.ArriveAt);
+    var localTime = time.toLocaleDateString() + ' ' + time.toLocaleTimeString();
+    var message = msg.Message;
+    var messageObj = {
+      ArriveAt:localTime,
+      Message:message,
+      User:'',
+      Name:''
     };
-  };*/
 
-
-
-
+    Profile.get(msg.User).$loaded().then(function(data){
+      messageObj.User = data.Facebook;
+      messageObj.Name = data.Name;
+    });
+    return messageObj;
+  };
 });
 
